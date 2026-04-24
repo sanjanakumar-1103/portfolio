@@ -6,7 +6,7 @@ A modern developer portfolio built with React and Vite, showcasing projects in a
 
 ## Live Demo
 
-https://your-portfolio.vercel.app
+https://portfolio-o9sc1s8ne-sanjanas-projects-36d6fdee.vercel.app/
 
 ---
 
