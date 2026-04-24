@@ -2,7 +2,7 @@
 
 A cinematic, premium personal portfolio built with React + Vite + Tailwind CSS + Framer Motion.
 
-## ✨ Features
+##  Features
 - Cinematic loading screen
 - Custom magnetic cursor with glow
 - Particle field background with node connections
@@ -14,7 +14,7 @@ A cinematic, premium personal portfolio built with React + Vite + Tailwind CSS +
 - Fully responsive (mobile + desktop)
 - Contact form UI (no backend)
 
-## 🚀 Quick Start
+##  Quick Start
 
 ```bash
 # 1. Install dependencies
@@ -27,7 +27,7 @@ npm run dev
 # http://localhost:5173
 ```
 
-## 📁 Project Structure
+##  Project Structure
 ```
 src/
 ├── App.jsx                  # Root component
@@ -49,13 +49,13 @@ src/
     └── Footer.jsx            # Footer
 ```
 
-## 🎨 Customization
+##  Customization
 - Edit personal info in each component
 - Add your real GitHub/LinkedIn URLs in `Contact.jsx`
 - Update project GitHub links in `Projects.jsx`
 - Tailwind palette configured in `tailwind.config.js`
 
-## 🛠 Tech Stack
+##  Tech Stack
 - React 18 + Vite 5
 - Tailwind CSS 3
 - Framer Motion 11
