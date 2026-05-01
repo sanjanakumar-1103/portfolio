@@ -6,66 +6,134 @@ import RevealSection from './RevealSection'
 const projects = [
   {
     id: 1,
-    title: 'NeuraSearch',
-    subtitle: 'RAG-based Semantic Search Engine',
+    title: "Agentic Enterprise Finance Assistant",
+    subtitle:
+      "Enterprise AI / Agentic Finance Compliance System",
+    tagline:
+      "AI-powered enterprise finance compliance and cost optimization system using LangChain, LangGraph, and RAG.",
+
     description:
-      'A retrieval-augmented generation engine that combines dense vector search with LLM generation to answer complex queries over large document corpora with high precision and explainability.',
-    tags: ['RAG', 'FAISS', 'Sentence Transformers', 'Python', 'FastAPI'],
-    accent: '#8b5cf6',
-    accent2: '#c084fc',
-    icon: '🔭',
-    github: 'https://github.com/sanjanakumar-1103/neurasearch-rag',
+      "Built an enterprise-grade AI finance assistant that automates expense compliance analysis, policy retrieval, and explainable cost optimization through multi-agent workflows. Designed using LangChain, LangGraph, FAISS-based RAG, and FastAPI to simulate real-world controlling, governance, and business decision-support systems.",
+
+    highlights: [
+      "Multi-agent workflow orchestration with LangChain + LangGraph",
+      "Enterprise expense CSV ingestion and compliance analysis",
+      "FAISS-powered policy retrieval using Retrieval-Augmented Generation (RAG)",
+      "Compliance violation detection across 9+ enterprise categories",
+      "Explainable AI recommendations for financial governance and cost control",
+      "Audit logging, traceability, and enterprise-grade transparency",
+    ],
+
+    tags: [
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "FastAPI",
+      "FAISS",
+      "Enterprise AI",
+    ],
+
+    tech: [
+      "Python",
+      "FastAPI",
+      "LangChain",
+      "LangGraph",
+      "FAISS",
+      "Sentence Transformers",
+      "SQLite",
+      "HTML/CSS",
+    ],
+
+    accent: "#7c3aed",
+    accent2: "#c084fc",
+    icon: "🏦",
+
+    github:
+      "https://github.com/sanjanakumar-1103/agentic-enterprise-finance-assistant",
     live: null,
+
+    featured: true,
+    badge: "Flagship Project",
+    category: "Enterprise AI / Agentic AI",
   },
+
   {
     id: 2,
-    title: 'AI Knowledge Assistant',
-    subtitle: 'FastAPI + FAISS Intelligent QA System',
+    title: "NeuraSearch",
+    subtitle: "RAG-based Semantic Search Engine",
     description:
-      'A production-grade knowledge assistant built on FastAPI with FAISS vector indexing. Supports real-time document ingestion, semantic chunking, and context-aware answer generation at scale.',
-    tags: ['FastAPI', 'FAISS', 'OpenAI', 'REST API', 'PostgreSQL'],
-    accent: '#7c3aed',
-    accent2: '#a78bfa',
-    icon: '🤖',
-    github: 'https://github.com/sanjanakumar-1103/ai-knowledge-assistant',
+      "A retrieval-augmented generation engine that combines dense vector search with LLM generation to answer complex queries over large document corpora with high precision and explainability.",
+    tags: ["RAG", "FAISS", "Sentence Transformers", "Python", "FastAPI"],
+    accent: "#8b5cf6",
+    accent2: "#c084fc",
+    icon: "🔭",
+    github: "https://github.com/sanjanakumar-1103/neurasearch-rag",
     live: null,
   },
+
   {
-  id: 3,
-  title: 'Context-Aware Bengali Hate Speech Detection',
-  subtitle: 'Explainable NLP System with BanglaBERT + MCP',
+    id: 3,
+    title: "AI Knowledge Assistant",
+    subtitle: "FastAPI + FAISS Intelligent QA System",
+    description:
+      "A production-grade knowledge assistant built on FastAPI with FAISS vector indexing. Supports real-time document ingestion, semantic chunking, and context-aware answer generation at scale.",
+    tags: ["FastAPI", "FAISS", "OpenAI", "REST API", "PostgreSQL"],
+    accent: "#7c3aed",
+    accent2: "#a78bfa",
+    icon: "🤖",
+    github: "https://github.com/sanjanakumar-1103/ai-knowledge-assistant",
+    live: null,
+  },
 
-  description:
-    'Built a hybrid NLP system using BanglaBERT and a custom Model Context Protocol (MCP) to detect Bengali hate speech. Integrates transformer-based predictions with rule-based context analysis (intent, severity, identity) to improve accuracy and provide explainable outputs.',
+  {
+    id: 4,
+    title: "Context-Aware Bengali Hate Speech Detection",
+    subtitle: "Explainable NLP System with BanglaBERT + MCP",
 
-  tags: ['NLP', 'Transformers', 'BanglaBERT', 'PyTorch', 'Explainable AI'],
+    description:
+      "Built a hybrid NLP system using BanglaBERT and a custom Model Context Protocol (MCP) to detect Bengali hate speech. Integrates transformer-based predictions with rule-based context analysis (intent, severity, identity) to improve accuracy and provide explainable outputs.",
 
-  accent: '#be185d',
-  accent2: '#f0abfc',
-  icon: '🌐',
+    tags: [
+      "NLP",
+      "Transformers",
+      "BanglaBERT",
+      "PyTorch",
+      "Explainable AI",
+    ],
 
-  github: null,
-  note: "Conference Paper (In Progress)",
-},
- {
-  id: 4,
-  title: 'Language Bridge: OCR-Based Intelligent Translation System',
+    accent: "#be185d",
+    accent2: "#f0abfc",
+    icon: "🌐",
 
-  subtitle: 'AI-Powered Document Translation with Semantic Validation',
+    github: null,
+    note: "Conference Paper (In Progress)",
+  },
 
-  description:
-    'Built an end-to-end AI pipeline that extracts text from academic documents using OCR (EasyOCR) and translates it into regional languages. Enhances translation reliability using embedding-based semantic validation with SentenceTransformers (cosine similarity via back-translation). Includes a Streamlit-based interface for document upload, translation, and history tracking, enabling accessible and context-preserving learning across languages.',
+  {
+    id: 5,
+    title: "Language Bridge: OCR-Based Intelligent Translation System",
 
-  tags: ['OCR', 'NLP', 'EasyOCR', 'SentenceTransformers', 'Streamlit'],
+    subtitle: "AI-Powered Document Translation with Semantic Validation",
 
-  accent: '#0ea5e9',
-  accent2: '#c084fc',
-  icon: '🔬',
+    description:
+      "Built an end-to-end AI pipeline that extracts text from academic documents using OCR (EasyOCR) and translates it into regional languages. Enhances translation reliability using embedding-based semantic validation with SentenceTransformers (cosine similarity via back-translation). Includes a Streamlit-based interface for document upload, translation, and history tracking, enabling accessible and context-preserving learning across languages.",
 
-  github: null,
-  badge: '📜 Patent Filed',
-  note: "Patent Pending"
-},
+    tags: [
+      "OCR",
+      "NLP",
+      "EasyOCR",
+      "SentenceTransformers",
+      "Streamlit",
+    ],
+
+    accent: "#0ea5e9",
+    accent2: "#c084fc",
+    icon: "🔬",
+
+    github: null,
+    badge: "📜 Patent Filed",
+    note: "Patent Pending",
+  },
 ]
 
 function ProjectCard({ project, index }) {

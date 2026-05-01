@@ -4,43 +4,71 @@ import RevealSection from './RevealSection'
 
 const skillCategories = [
   {
-    label: "Languages",
-    icon: "<>",
+    label: "Agentic AI & Enterprise AI",
+    icon: "⚡",
     color: "#8b5cf6",
-    items: ["Python", "Java", "JavaScript", "SQL"]
+    items: [
+      "Agentic AI",
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "FAISS",
+      "Explainable AI"
+    ]
   },
+
   {
-    label: "Core CS",
+    label: "AI / Machine Learning",
     icon: "✦",
     color: "#c084fc",
-    items: ["Data Structures", "Algorithms"]
+    items: [
+      "NLP",
+      "Transformers",
+      "Sentence Transformers",
+      "Model Fine-tuning",
+      "Scikit-learn"
+    ]
   },
-  {
-    label: "AI / ML",
-    icon: "⚡",
-    color: "#a78bfa",
-    items: ["Machine Learning", "NLP", "Transformers", "Model Fine-tuning"]
-  },
-  {
-    label: "Frameworks & Libraries",
-    icon: "◈",
-    color: "#f0abfc",
-    items: ["React", "Node.js", "Express", "FastAPI", "PyTorch", "Hugging Face"]
-  },
+
   {
     label: "Backend & APIs",
     icon: "⚙",
     color: "#818cf8",
-    items: ["REST APIs", "API Design", "Authentication Basics", "Redis"]
+    items: [
+      "FastAPI",
+      "REST APIs",
+      "Async Programming",
+      "SQLite",
+      "PostgreSQL"
+    ]
   },
-  {
-    label: "Tools & Platforms",
-    icon: "✦",
-    color: "#c084fc",
-    items: ["Postman", "Streamlit", "Vercel", "Git", "GitHub"]
-  },
-]
 
+  {
+    label: "Core CS",
+    icon: "◈",
+    color: "#a78bfa",
+    items: [
+      "Data Structures",
+      "Hashing",
+      "Inverted Indexing",
+      "Search Optimization"
+    ]
+  },
+
+  {
+    label: "Frontend & Tools",
+    icon: "{ }",
+    color: "#f0abfc",
+    items: [
+      "React",
+      "JavaScript",
+      "HTML/CSS",
+      "Git",
+      "GitHub",
+      "Postman"
+    ]
+  }
+]
 function SkillBadge({ skill, color, delay }) {
   return (
     <motion.span

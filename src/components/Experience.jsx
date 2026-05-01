@@ -4,57 +4,97 @@ import RevealSection from './RevealSection'
 
 const experiences = [
   {
-    year: '2026',
-    title: 'RAG Systems Engineering',
-    subtitle: 'AI Research & Development',
+    year: "2026",
+    title: "Agentic Enterprise AI Systems",
+    subtitle: "LangChain • LangGraph • Enterprise Finance Automation",
+
     description:
-      'Designed and implemented end-to-end Retrieval-Augmented Generation pipelines using FAISS and Sentence Transformers. Achieved sub-200ms retrieval latency on 100K+ document collections through chunking optimization and index tuning.',
-    highlights: ['FAISS Vector Indexing', 'Semantic Chunking', 'RAG Architecture', 'Sub-200ms Retrieval'],
-    color: '#8b5cf6',
+      "Designed and built an enterprise-grade Agentic Enterprise Finance Assistant using LangChain, LangGraph, FastAPI, and FAISS-based RAG. Engineered multi-agent compliance workflows for expense governance, policy-aware financial analysis, explainable recommendations, and audit-grade enterprise traceability.",
+
+    highlights: [
+      "LangChain + LangGraph",
+      "Enterprise AI",
+      "RAG + FAISS",
+      "Compliance Automation",
+      "Explainable AI",
+      "Financial Governance"
+    ],
+
+    color: "#7c3aed",
   },
+
   {
-    year: '2026',
-    title: 'Backend API Development',
-    subtitle: 'FastAPI & Scalable Architecture',
+    year: "2026",
+    title: "RAG Systems Engineering",
+    subtitle: "AI Research & Retrieval-Augmented Systems",
+
     description:
-      'Built production-grade REST APIs with FastAPI, implementing async request handling, Pydantic schema validation, and PostgreSQL integration. Achieved 3× throughput improvements through async optimization and connection pooling.',
-    highlights: ['FastAPI', 'Async Architecture', 'PostgreSQL', 'API Optimization'],
-    color: '#a78bfa',
+      "Designed and implemented end-to-end Retrieval-Augmented Generation pipelines using FAISS and Sentence Transformers. Built scalable semantic retrieval systems with chunking optimization, indexing strategies, and explainable search architectures for large document collections.",
+
+    highlights: [
+      "FAISS Vector Indexing",
+      "Semantic Chunking",
+      "RAG Architecture",
+      "Search Optimization"
+    ],
+
+    color: "#8b5cf6",
   },
+
   {
-  year: '2025',
-  title: 'Language Bridge — Patent Pending',
-  subtitle: 'AI-Powered OCR Translation System',
+    year: "2026",
+    title: "Backend API Development",
+    subtitle: "FastAPI • Async Systems • Scalable Architecture",
 
-  description:
-    'Designed an OCR-based document translation pipeline using EasyOCR and translation APIs, with semantic validation via SentenceTransformers to preserve contextual meaning. Built for improving access to educational content across regional languages.',
+    description:
+      "Built production-grade backend systems using FastAPI with async request handling, modular API design, schema validation, database integration, and performance-focused architecture for AI-powered enterprise systems.",
 
-  highlights: [
-    'Patent Pending',
-    'OCR + Translation Pipeline',
-    'Semantic Validation',
-    'Streamlit Interface'
-  ],
+    highlights: [
+      "FastAPI",
+      "REST APIs",
+      "Async Architecture",
+      "PostgreSQL",
+      "Scalable Backend"
+    ],
 
-  color: '#c084fc',
-},
-{
-  year: '2025',
-  title: 'NLP Research',
-  subtitle: 'Bengali Hate Speech Detection',
+    color: "#a78bfa",
+  },
 
-  description:
-    'Developed a hybrid NLP system using BanglaBERT and a custom context framework (MCP) to detect hate speech in Bengali text. Combined transformer predictions with rule-based context analysis to improve interpretability and classification reliability.',
+  {
+    year: "2025",
+    title: "Language Bridge — Patent Pending",
+    subtitle: "AI-Powered OCR Translation System",
 
-  highlights: [
-    'BanglaBERT',
-    'Explainable AI',
-    'Context-Aware NLP',
-    'Conference Paper (In Progress)'
-  ],
+    description:
+      "Designed an OCR-based multilingual document translation pipeline using EasyOCR and translation APIs, enhanced with semantic validation via SentenceTransformers to preserve contextual meaning. Built for improving educational accessibility across regional languages.",
 
-  color: '#f0abfc',
-}
+    highlights: [
+      "Patent Pending",
+      "OCR + Translation Pipeline",
+      "Semantic Validation",
+      "Streamlit Interface"
+    ],
+
+    color: "#c084fc",
+  },
+
+  {
+    year: "2025",
+    title: "NLP Research",
+    subtitle: "Context-Aware Bengali Hate Speech Detection",
+
+    description:
+      "Developed a hybrid NLP system using BanglaBERT and a custom Model Context Protocol (MCP) framework to detect Bengali hate speech. Combined transformer-based predictions with rule-based contextual reasoning to improve explainability, severity analysis, and classification reliability.",
+
+    highlights: [
+      "BanglaBERT",
+      "Explainable AI",
+      "Context-Aware NLP",
+      "Conference Paper (In Progress)"
+    ],
+
+    color: "#f0abfc",
+  },
 ]
 
 export default function Experience() {
