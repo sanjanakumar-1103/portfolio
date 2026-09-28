@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanjana S — AI Engineer & Backend Architect</title>
+  <meta name="description" content="Portfolio of Sanjana S — Building intelligent systems with AI, RAG & scalable backend design." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --obsidian: #070711;
+      --void: #0a0a18;
+      --dusk: #12112a;
+      --lavender-300: #c4b5fd;
+      --lavender-400: #a78bfa;
+      --lavender-500: #8b5cf6;
+      --lavender-600: #7c3aed;
+      --mauve: #c084fc;
+      --blush: #f0abfc;
+      --mist: #e0d7ff;
+      --rose-300: #fda4af;
+    }
+
+    html { scroll-behavior: smooth; cursor: none; }
+
+    body {
+      background-color: var(--obsidian);
+      color: var(--mist);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    ::selection { background: rgba(139,92,246,0.4); color: #f5f3ff; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--obsidian); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, #8b5cf6, #c084fc);
+      border-radius: 2px;
+    }
+
+    /* ─── CURSOR ─── */
+    .cursor-dot {
+      width: 6px; height: 6px;
+      background: #c084fc; border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: opacity .3s;
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(192,132,252,.5);
+      border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width .2s, height .2s, border-color .2s, background .2s;
+    }
+    .cursor-ring.hovering {
+      width: 48px; height: 48px;
+      border-color: rgba(192,132,252,.9);
+      background: rgba(139,92,246,.08);
+    }
+
+    /* ─── SCROLL PROGRESS ─── */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(90deg, #8b5cf6, #c084fc, #f0abfc);
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(192,132,252,.6);
+      transition: width .1s linear;
+    }
+
+    /* ─── PARTICLES ─── */
+    #particle-canvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ─── LOADER ─── */
+    #loader {
+      position: fixed; inset: 0; z-index: 9000;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: var(--obsidian);
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-orb {
+      width: 96px; height: 96px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,132,252,.8) 0%, rgba(139,92,246,.4) 40%, transparent 70%);
+      animation: orbPulse 2s ease-in-out infinite;
+      position: relative; margin-bottom: 2rem;
+    }
+    .loader-orb::before, .loader-orb::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid rgba(192,132,252,.3);
+      animation: orbRing 1.5s ease-out infinite;
+    }
+    .loader-orb::after { animation-delay: .3s; border-color: rgba(192,132,252,.2); }
+
+    .loader-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; letter-spacing: .3em;
+      color: rgba(224,215,255,.8); margin-bottom: .5rem;
+      animation: fadeInUp .8s .3s both;
+    }
+    .loader-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(192,132,252,.5); margin-bottom: 2.5rem;
+      animation: fadeInUp .8s .6s both;
+    }
+    .loader-bar-wrap {
+      width: 12rem; height: 1px;
+      background: rgba(255,255,255,.05); border-radius: 999px; overflow: hidden;
+    }
+    .loader-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #8b5cf6, #c084fc, #f0abfc);
+      box-shadow: 0 0 10px rgba(192,132,252,.8);
+      border-radius: 999px;
+      animation: loadBar 1.8s ease-in-out forwards;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: 1.25rem 0; transition: all .5s;
+    }
+    nav.scrolled {
+      background: rgba(18,17,42,.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      padding: .75rem 0;
+    }
+    .nav-inner {
+      max-width: 72rem; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; letter-spacing: .1em;
+      background: linear-gradient(135deg, #e0d7ff, #c084fc, #f0abfc, #fda4af);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; cursor: pointer; border: none; background-color: transparent;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .875rem; color: rgba(224,215,255,.45);
+      text-decoration: none; transition: color .3s; position: relative; cursor: pointer;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: linear-gradient(90deg, #c084fc, #f0abfc);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: rgba(224,215,255,.9); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-controls { display: flex; align-items: center; gap: 1rem; }
+    .theme-toggle {
+      width: 2rem; height: 2rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; cursor: pointer;
+      color: rgba(224,215,255,.35); transition: color .3s;
+    }
+    .theme-toggle:hover { color: rgba(224,215,255,.8); }
+
+    /* ─── LAYOUT ─── */
+    main { position: relative; z-index: 10; }
+    .section-pad { padding: 5rem 1.5rem; }
+    @media (min-width: 768px) { .section-pad { padding: 7rem 2rem; } }
+    .max-w { max-width: 72rem; margin: 0 auto; }
+
+    /* ─── GLASS ─── */
+    .glass {
+      background: rgba(18,17,42,.6);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(139,92,246,.12);
+    }
+    .glass-hover { transition: all .4s cubic-bezier(.23,1,.32,1); }
+    .glass-hover:hover {
+      background: rgba(26,24,58,.8);
+      border-color: rgba(192,132,252,.28);
+      box-shadow: 0 0 30px rgba(139,92,246,.1), 0 0 80px rgba(139,92,246,.04), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    /* ─── TEXT ─── */
+    .gradient-text {
+      background: linear-gradient(135deg, #e0d7ff 0%, #c084fc 40%, #f0abfc 70%, #fda4af 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .gradient-text-2 {
+      background: linear-gradient(135deg, #c084fc, #8b5cf6, #7c3aed);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .glow-text { text-shadow: 0 0 20px rgba(192,132,252,.6), 0 0 60px rgba(139,92,246,.3); }
+    .display { font-family: 'Cormorant Garamond', serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* ─── TAG ─── */
+    .tag {
+      display: inline-flex; align-items: center;
+      padding: .2rem .7rem; border-radius: 9999px;
+      font-size: .7rem; font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .05em;
+      background: rgba(139,92,246,.1);
+      border: 1px solid rgba(139,92,246,.2);
+      color: #c4b5fd; white-space: nowrap;
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+    }
+    .section-num { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: rgba(192,132,252,.5); letter-spacing: .2em; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.2rem); color: rgba(224,215,255,.9); }
+    .section-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(192,132,252,.2), transparent); }
+    .section-sub { font-size: .875rem; color: rgba(224,215,255,.28); margin-bottom: 3rem; padding-left: 2.5rem; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 6rem 1.5rem 4rem;
+    }
+    .hero-content { text-align: center; max-width: 56rem; position: relative; z-index: 2; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .375rem 1rem; border-radius: 9999px; margin-bottom: 2rem;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #34d399; animation: pulseSlow 3s ease-in-out infinite;
+    }
+    .hero-badge span { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: rgba(224,215,255,.45); letter-spacing: .15em; }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      font-weight: 300; line-height: 1; margin-bottom: 1rem;
+    }
+    .hero-tagline {
+      font-size: clamp(.95rem, 2.5vw, 1.15rem);
+      color: rgba(224,215,255,.38); font-weight: 300;
+      max-width: 36rem; margin: 0 auto 1.5rem;
+    }
+    .typing-row {
+      display: flex; align-items: center; justify-content: center; gap: .75rem;
+      margin-bottom: 3rem; min-height: 2.5rem;
+    }
+    .typing-label { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: rgba(224,215,255,.25); }
+    .typing-word { font-family: 'JetBrains Mono', monospace; font-size: .9rem; color: #c084fc; font-weight: 500; }
+    .cursor-blink {
+      display: inline-block; width: 2px; height: 1em;
+      background: #c084fc; margin-left: 2px; vertical-align: middle;
+      animation: blink .8s step-end infinite;
+    }
+    .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem; }
+    .btn-primary {
+      padding: .875rem 2rem; border-radius: 9999px;
+      font-size: .875rem; font-weight: 500; letter-spacing: .05em;
+      color: white; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #7c3aed, #c084fc);
+      box-shadow: 0 0 30px rgba(139,92,246,.4);
+      transition: all .3s; position: relative; overflow: hidden;
+    }
+    .btn-primary:hover { box-shadow: 0 0 50px rgba(192,132,252,.5); transform: translateY(-2px); }
+    .btn-secondary {
+      padding: .875rem 2rem; border-radius: 9999px;
+      font-size: .875rem; font-weight: 400; letter-spacing: .05em;
+      color: rgba(224,215,255,.65); cursor: pointer;
+      background: rgba(18,17,42,.6); border: 1px solid rgba(139,92,246,.15);
+      backdrop-filter: blur(20px); transition: all .3s;
+    }
+    .btn-secondary:hover {
+      color: rgba(224,215,255,.9); border-color: rgba(192,132,252,.3);
+      transform: translateY(-2px);
+    }
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+    }
+    .scroll-hint-text { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: rgba(224,215,255,.18); letter-spacing: .3em; }
+    .scroll-line {
+      width: 1px; height: 3rem;
+      background: linear-gradient(to bottom, rgba(192,132,252,.4), transparent);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid { display: grid; gap: 4rem; align-items: center; }
+    @media (min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+    .about-text p { font-weight: 300; color: rgba(224,215,255,.5); line-height: 1.8; margin-bottom: 1.25rem; }
+    .about-text .accent { color: #c084fc; font-weight: 500; }
+    .about-text .accent2 { color: #c4b5fd; }
+    .about-text .accent3 { color: #f0abfc; }
+    .highlight-chips { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+    .chip {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .5rem 1rem; border-radius: 9999px;
+      font-size: .8rem; color: rgba(224,215,255,.55);
+      background: rgba(18,17,42,.6); border: 1px solid rgba(139,92,246,.1);
+    }
+    .stat-card { border-radius: 1rem; padding: 2rem; position: relative; overflow: hidden; }
+    .stat-item { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.04); }
+    .stat-item:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: none; }
+    .stat-label { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: rgba(224,215,255,.25); letter-spacing: .15em; text-transform: uppercase; margin-bottom: .25rem; }
+    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 2rem; }
+    .stat-sub { font-size: .7rem; color: rgba(224,215,255,.25); text-align: right; max-width: 120px; }
+
+    /* ─── PROJECTS ─── */
+    .projects-grid { display: grid; gap: 1.25rem; }
+    @media (min-width: 768px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+    .project-card {
+      border-radius: 1rem; padding: 1.75rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+      position: relative; overflow: hidden; cursor: default;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--card-color, #8b5cf6), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .project-card:hover::before { opacity: 1; }
+    .project-card:hover { transform: translateY(-3px); }
+    .project-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .project-icon {
+      width: 2.5rem; height: 2.5rem; border-radius: .75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .project-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: rgba(224,215,255,.9); line-height: 1.2; }
+    .project-sub { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: rgba(224,215,255,.28); margin-top: .2rem; }
+    .project-badge {
+      font-size: .65rem; font-family: 'JetBrains Mono', monospace;
+      background: rgba(245,158,11,.08); color: rgba(252,211,77,.65);
+      border: 1px solid rgba(245,158,11,.2); padding: .2rem .6rem; border-radius: 999px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .project-desc { font-size: .85rem; color: rgba(224,215,255,.38); line-height: 1.7; font-weight: 300; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .project-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,.05), transparent); }
+    .project-actions { display: flex; align-items: center; gap: .75rem; }
+    .btn-github {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .4rem 1rem; border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace; font-size: .7rem;
+      color: rgba(224,215,255,.45);
+      background: rgba(18,17,42,.6); border: 1px solid rgba(255,255,255,.06);
+      cursor: pointer; text-decoration: none; transition: all .3s;
+    }
+    .btn-github:hover { color: rgba(224,215,255,.9); border-color: rgba(192,132,252,.2); }
+    .btn-live {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .4rem 1rem; border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace; font-size: .7rem;
+      cursor: pointer; text-decoration: none; transition: all .3s;
+    }
+
+    /* ─── SKILLS ─── */
+    .skill-cat { border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .skill-cat-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; }
+    .skill-cat-icon {
+      width: 1.75rem; height: 1.75rem; border-radius: .5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-family: 'JetBrains Mono', monospace;
+    }
+    .skill-cat-label { font-size: .875rem; font-weight: 500; color: rgba(224,215,255,.45); letter-spacing: .05em; }
+    .skill-badges { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .skill-badge {
+      padding: .35rem .9rem; border-radius: .5rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .72rem;
+      cursor: default; transition: all .25s; border: 1px solid;
+    }
+    .skill-badge:hover { transform: translateY(-2px) scale(1.05); }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-item { margin-bottom: 2rem; }
+    .exp-card {
+      border-radius: 1rem; padding: 1.75rem; position: relative; overflow: hidden;
+    }
+    .exp-year { font-family: 'JetBrains Mono', monospace; font-size: .65rem; letter-spacing: .2em; margin-bottom: .25rem; text-transform: uppercase; }
+    .exp-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: rgba(224,215,255,.9); }
+    .exp-subtitle { font-size: .8rem; color: rgba(224,215,255,.3); margin-top: .2rem; margin-bottom: 1rem; }
+    .exp-desc { font-size: .875rem; color: rgba(224,215,255,.42); line-height: 1.75; font-weight: 300; margin-bottom: 1.25rem; }
+    .exp-highlights { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+    /* ─── CONTACT ─── */
+    .contact-grid { display: grid; gap: 3rem; align-items: start; }
+    @media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+    .contact-intro { font-size: .95rem; color: rgba(224,215,255,.45); line-height: 1.8; font-weight: 300; margin-bottom: 2rem; }
+    .social-link {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem; border-radius: .75rem; margin-bottom: .75rem;
+      text-decoration: none; transition: all .3s;
+    }
+    .social-icon {
+      width: 2.5rem; height: 2.5rem; border-radius: .5rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .social-label { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: rgba(224,215,255,.25); letter-spacing: .15em; text-transform: uppercase; margin-bottom: .2rem; }
+    .social-value { font-size: .875rem; color: rgba(224,215,255,.55); transition: color .3s; }
+    .social-link:hover .social-value { color: rgba(224,215,255,.9); }
+    .contact-form-card { border-radius: 1rem; padding: 1.75rem; position: relative; overflow: hidden; }
+    .contact-form-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(192,132,252,.35), transparent);
+    }
+    .form-label { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: rgba(224,215,255,.25); letter-spacing: .15em; text-transform: uppercase; display: block; margin-bottom: .5rem; }
+    .form-field {
+      width: 100%; padding: .75rem 1rem; border-radius: .75rem;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+      color: rgba(224,215,255,.65); font-family: 'DM Sans', sans-serif; font-size: .875rem;
+      outline: none; transition: all .3s; margin-bottom: 1.25rem;
+      resize: none;
+    }
+    .form-field::placeholder { color: rgba(224,215,255,.18); }
+    .form-field:focus { border-color: rgba(192,132,252,.3); background: rgba(255,255,255,.05); }
+    .btn-submit {
+      width: 100%; padding: .875rem; border-radius: .75rem;
+      font-family: 'DM Sans', sans-serif; font-size: .875rem; font-weight: 500;
+      color: white; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #7c3aed, #c084fc);
+      box-shadow: 0 0 30px rgba(139,92,246,.3);
+      transition: all .3s; position: relative; overflow: hidden;
+    }
+    .btn-submit:hover { box-shadow: 0 0 50px rgba(192,132,252,.4); transform: translateY(-2px); }
+    .success-msg {
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      padding: 3rem; text-align: center;
+    }
+    .success-msg.show { display: flex; }
+    .success-icon {
+      width: 4rem; height: 4rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+      background: rgba(139,92,246,.15); border: 1px solid rgba(192,132,252,.3);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,.05); padding: 2.5rem 1.5rem;
+      position: relative; z-index: 10;
+    }
+    .footer-inner {
+      max-width: 72rem; margin: 0 auto;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; letter-spacing: .1em; }
+    .footer-credit { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: rgba(224,215,255,.18); letter-spacing: .1em; }
+    .footer-copy { font-size: .75rem; color: rgba(224,215,255,.18); }
+
+    /* ─── BLOBS ─── */
+    .blob-fixed {
+      position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(80px);
+    }
+    .blob-1 { top: -10rem; left: -10rem; width: 30rem; height: 30rem; background: radial-gradient(circle, rgba(124,58,237,.18) 0%, transparent 70%); }
+    .blob-2 { bottom: -10rem; right: -10rem; width: 24rem; height: 24rem; background: radial-gradient(circle, rgba(192,132,252,.12) 0%, transparent 70%); }
+    .blob-3 { top: 50%; left: 50%; transform: translate(-50%,-50%); width: 50rem; height: 50rem; background: radial-gradient(circle, rgba(76,29,149,.06) 0%, transparent 60%); }
+
+    /* ─── REVEAL ANIMATION ─── */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s cubic-bezier(.23,1,.32,1), transform .8s cubic-bezier(.23,1,.32,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── LIGHT MODE ─── */
+    body.light {
+      background-color: #f5f3ff;
+      color: #1a103c;
+    }
+    body.light .glass {
+      background: rgba(240,235,255,.7);
+      border-color: rgba(139,92,246,.15);
+    }
+    body.light .glass-hover:hover {
+      background: rgba(235,228,255,.9);
+    }
+    body.light .project-desc, body.light .about-text p, body.light .exp-desc, body.light .contact-intro { color: rgba(26,16,60,.55); }
+    body.light .section-title { color: rgba(26,16,60,.9); }
+    body.light .hero-tagline { color: rgba(26,16,60,.45); }
+    body.light .nav-links a { color: rgba(26,16,60,.5); }
+    body.light nav.scrolled { background: rgba(240,235,255,.8); border-color: rgba(139,92,246,.12); }
+    body.light .form-field { background: rgba(139,92,246,.05); border-color: rgba(139,92,246,.12); color: rgba(26,16,60,.7); }
+    body.light .btn-secondary { background: rgba(240,235,255,.8); color: rgba(26,16,60,.65); }
+    body.light #scroll-progress { background: linear-gradient(90deg, #7c3aed, #c084fc, #e879f9); }
+    body.light .stat-sub, body.light .social-label, body.light .section-num, body.light .project-sub { color: rgba(26,16,60,.3); }
+    body.light .social-value { color: rgba(26,16,60,.55); }
+    body.light .social-link:hover .social-value { color: rgba(26,16,60,.9); }
+
+    /* ─── KEYFRAMES ─── */
+    @keyframes orbPulse {
+      0%,100% { transform: scale(1); opacity: .7; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+    @keyframes orbRing {
+      0% { transform: scale(1); opacity: .6; }
+      100% { transform: scale(1.9); opacity: 0; }
+    }
+    @keyframes loadBar {
+      0% { width: 0; } 100% { width: 100%; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; } 50% { opacity: 0; }
+    }
+    @keyframes pulseSlow {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(1.4); }
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    /* Responsive nav */
+    @media (max-width: 767px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Scroll progress -->
+<div id="scroll-progress"></div>
+
+<!-- Particle canvas -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- Fixed blobs -->
+<div class="blob-fixed blob-1"></div>
+<div class="blob-fixed blob-2"></div>
+<div class="blob-fixed blob-3"></div>
+
+<!-- ═══════════════════════════════════ LOADER ═══════════════════════════════════ -->
+<div id="loader">
+  <div class="loader-orb"></div>
+  <div class="loader-name">Sanjana S</div>
+  <div class="loader-sub">AI Engineer · Backend Architect</div>
+  <div class="loader-bar-wrap">
+    <div class="loader-bar" id="loaderBar"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ NAVBAR ═══════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <button class="nav-logo" onclick="scrollToTop()">S<span style="color:rgba(192,132,252,.5)">.</span></button>
+    <ul class="nav-links">
+      <li><a onclick="scrollTo('about')">About</a></li>
+      <li><a onclick="scrollTo('projects')">Projects</a></li>
+      <li><a onclick="scrollTo('skills')">Skills</a></li>
+      <li><a onclick="scrollTo('experience')">Experience</a></li>
+      <li><a onclick="scrollTo('contact')">Contact</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
+        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════ MAIN ═══════════════════════════════════ -->
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-badge glass reveal" style="transition-delay:.1s">
+        <span class="hero-badge-dot"></span>
+        <span>Available for opportunities</span>
+      </div>
+
+      <h1 class="hero-name reveal" style="transition-delay:.2s">
+        <span class="gradient-text glow-text">Sanjana</span>
+        <span style="color:rgba(224,215,255,.18); margin-left:.25em">S</span>
+      </h1>
+
+      <p class="hero-tagline reveal" style="transition-delay:.35s">
+        Building intelligent systems with AI, RAG &amp; scalable backend design
+      </p>
+
+      <div class="typing-row reveal" style="transition-delay:.5s">
+        <span class="typing-label">Currently crafting →</span>
+        <span class="typing-word" id="typingWord"></span>
+        <span class="cursor-blink"></span>
+      </div>
+
+      <div class="hero-ctas reveal" style="transition-delay:.65s">
+        <button class="btn-primary" onclick="scrollTo('projects')">View Projects</button>
+        <button class="btn-secondary" onclick="scrollTo('contact')">Contact Me</button>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span class="scroll-hint-text">SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+    <!-- Hero blobs -->
+    <div style="position:absolute;top:25%;left:-8rem;width:24rem;height:24rem;border-radius:50%;opacity:.18;filter:blur(60px);background:radial-gradient(circle,#7c3aed,transparent 70%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:25%;right:-8rem;width:20rem;height:20rem;border-radius:50%;opacity:.12;filter:blur(60px);background:radial-gradient(circle,#c084fc,transparent 70%);pointer-events:none"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-pad">
+    <div class="max-w">
+      <div class="section-header reveal">
+        <span class="section-num">01 /</span>
+        <h2 class="section-title">About Me</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text reveal" style="transition-delay:.1s">
+          <p>I'm an <span class="accent">MCA student</span> with a deep focus on building real-world AI systems. My work lives at the intersection of machine learning, backend architecture, and intelligent data retrieval.</p>
+          <p>Specializing in <span class="accent2">Retrieval-Augmented Generation (RAG)</span> and NLP, I design systems that go beyond simple model wrappers — building scalable pipelines with semantic search, vector embeddings, and optimized APIs that perform in production.</p>
+          <p>When I'm not training models or tuning vector indices, I'm exploring language understanding, filing patents for novel ideas, and pushing the limits of what <span class="accent3">AI-native applications</span> can do.</p>
+          <div class="highlight-chips">
+            <span class="chip">🧠 AI / ML Systems</span>
+            <span class="chip">⚡ FastAPI Backend</span>
+            <span class="chip">🔍 RAG Pipelines</span>
+            <span class="chip">📄 Patent Filed</span>
+          </div>
+        </div>
+
+        <div class="reveal" style="transition-delay:.25s; position:relative">
+          <div class="stat-card glass glass-hover">
+            <div class="stat-item">
+              <div>
+                <div class="stat-label">Projects Built</div>
+                <div class="stat-value gradient-text-2">4+</div>
+              </div>
+              <div class="stat-sub">AI-native systems</div>
+            </div>
+            <div class="stat-item">
+              <div>
+                <div class="stat-label">Patent Filed</div>
+                <div class="stat-value gradient-text-2">01</div>
+              </div>
+              <div class="stat-sub">Language Bridge (OCR)</div>
+            </div>
+            <div class="stat-item">
+              <div>
+                <div class="stat-label">Focus Area</div>
+                <div class="stat-value gradient-text-2">RAG</div>
+              </div>
+              <div class="stat-sub">Semantic search &amp; retrieval</div>
+            </div>
+          </div>
+          <div style="position:absolute;top:-12px;right:-12px;width:24px;height:24px;border-radius:50%;background:rgba(192,132,252,.6);filter:blur(6px);animation:pulseSlow 3s ease-in-out infinite"></div>
+          <div style="position:absolute;bottom:-8px;left:-8px;width:16px;height:16px;border-radius:50%;background:rgba(240,171,252,.4);filter:blur(5px);animation:float 5s ease-in-out infinite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section-pad">
+    <div class="max-w">
+      <div class="section-header reveal">
+        <span class="section-num">02 /</span>
+        <h2 class="section-title">Projects</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-sub reveal" style="transition-delay:.05s">Systems built to solve real problems, not demos.</p>
+
+      <div class="projects-grid">
+
+        <!-- Project 1 -->
+        <div class="project-card glass glass-hover reveal" style="--card-color:#8b5cf6;transition-delay:.08s">
+          <div class="project-header">
+            <div style="display:flex;align-items:center;gap:.75rem">
+              <div class="project-icon" style="background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25)">🔭</div>
+              <div>
+                <div class="project-title">NeuraSearch</div>
+                <div class="project-sub">RAG-based Semantic Search Engine</div>
+              </div>
+            </div>
+          </div>
+          <p class="project-desc">A retrieval-augmented generation engine combining dense vector search with LLM generation to answer complex queries over large document corpora with high precision and explainability.</p>
+          <div class="tags">
+            <span class="tag">RAG</span><span class="tag">FAISS</span><span class="tag">Sentence Transformers</span><span class="tag">Python</span><span class="tag">FastAPI</span>
+          </div>
+          <div class="project-divider"></div>
+          <div class="project-actions">
+            <a href="#" class="btn-github" onclick="return false">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card glass glass-hover reveal" style="--card-color:#7c3aed;transition-delay:.16s">
+          <div class="project-header">
+            <div style="display:flex;align-items:center;gap:.75rem">
+              <div class="project-icon" style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25)">🤖</div>
+              <div>
+                <div class="project-title">AI Knowledge Assistant</div>
+                <div class="project-sub">FastAPI + FAISS Intelligent QA System</div>
+              </div>
+            </div>
+          </div>
+          <p class="project-desc">A production-grade knowledge assistant built on FastAPI with FAISS vector indexing. Supports real-time document ingestion, semantic chunking, and context-aware answer generation at scale.</p>
+          <div class="tags">
+            <span class="tag">FastAPI</span><span class="tag">FAISS</span><span class="tag">OpenAI</span><span class="tag">REST API</span><span class="tag">PostgreSQL</span>
+          </div>
+          <div class="project-divider"></div>
+          <div class="project-actions">
+            <a href="#" class="btn-github" onclick="return false">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="btn-live" onclick="return false" style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);color:#a78bfa">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card glass glass-hover reveal" style="--card-color:#be185d;transition-delay:.24s">
+          <div class="project-header">
+            <div style="display:flex;align-items:center;gap:.75rem">
+              <div class="project-icon" style="background:rgba(190,24,93,.12);border:1px solid rgba(190,24,93,.2)">🌐</div>
+              <div>
+                <div class="project-title">Bengali Hate Speech Detector</div>
+                <div class="project-sub">Context-aware NLP Classification</div>
+              </div>
+            </div>
+          </div>
+          <p class="project-desc">A multilingual NLP model for detecting hate speech in Bengali social media content. Uses contextual embeddings and fine-tuned transformer models to capture cultural nuance and code-switching.</p>
+          <div class="tags">
+            <span class="tag">NLP</span><span class="tag">Transformers</span><span class="tag">PyTorch</span><span class="tag">HuggingFace</span><span class="tag">Python</span>
+          </div>
+          <div class="project-divider"></div>
+          <div class="project-actions">
+            <a href="#" class="btn-github" onclick="return false">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card glass glass-hover reveal" style="--card-color:#0ea5e9;transition-delay:.32s">
+          <div class="project-header">
+            <div style="display:flex;align-items:center;gap:.75rem">
+              <div class="project-icon" style="background:rgba(14,165,233,.12);border:1px solid rgba(14,165,233,.2)">🔬</div>
+              <div>
+                <div class="project-title">Language Bridge</div>
+                <div class="project-sub">OCR-based Translation System</div>
+              </div>
+            </div>
+            <span class="project-badge">📜 Patent Filed</span>
+          </div>
+          <p class="project-desc">An innovative OCR-powered translation pipeline that extracts text from images and translates across 20+ languages in real time. Novel architecture led to a filed patent for the core methodology.</p>
+          <div class="tags">
+            <span class="tag">OCR</span><span class="tag">Computer Vision</span><span class="tag">Translation API</span><span class="tag">Python</span><span class="tag">Patent</span>
+          </div>
+          <div class="project-divider"></div>
+          <div class="project-actions">
+            <a href="#" class="btn-github" onclick="return false">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="btn-live" onclick="return false" style="background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.25);color:rgba(125,211,252,.8)">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section-pad">
+    <div class="max-w">
+      <div class="section-header reveal">
+        <span class="section-num">03 /</span>
+        <h2 class="section-title">Skills</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div id="skillsContainer"></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section-pad">
+    <div class="max-w">
+      <div class="section-header reveal">
+        <span class="section-num">04 /</span>
+        <h2 class="section-title">Experience</h2>
+        <div class="section-line"></div>
+      </div>
+      <div id="expContainer"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-pad">
+    <div class="max-w">
+      <div class="section-header reveal">
+        <span class="section-num">05 /</span>
+        <h2 class="section-title">Contact</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-sub reveal" style="transition-delay:.05s">Let's build something remarkable together.</p>
+
+      <div class="contact-grid">
+        <div class="reveal" style="transition-delay:.1s">
+          <p class="contact-intro">Whether you're looking to collaborate on AI research, build intelligent systems, or just want to say hello — I'd love to connect.</p>
+
+          <a href="mailto:sanjana.s@example.com" class="social-link glass glass-hover">
+            <div class="social-icon" style="background:rgba(192,132,252,.12);border:1px solid rgba(192,132,252,.2);color:#c084fc">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div><div class="social-label">Email</div><div class="social-value">sanjana.s@example.com</div></div>
+            <svg style="margin-left:auto;opacity:0;transition:opacity .3s" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+
+          <a href="https://github.com" target="_blank" class="social-link glass glass-hover">
+            <div class="social-icon" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.2);color:#a78bfa">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </div>
+            <div><div class="social-label">GitHub</div><div class="social-value">github.com/sanjana-s</div></div>
+          </a>
+
+          <a href="https://linkedin.com" target="_blank" class="social-link glass glass-hover">
+            <div class="social-icon" style="background:rgba(129,140,248,.12);border:1px solid rgba(129,140,248,.2);color:#818cf8">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div><div class="social-label">LinkedIn</div><div class="social-value">linkedin.com/in/sanjana-s</div></div>
+          </a>
+        </div>
+
+        <div class="reveal" style="transition-delay:.2s">
+          <div class="contact-form-card glass">
+            <div id="formWrapper">
+              <div style="margin-bottom:1.25rem">
+                <label class="form-label">Your Name</label>
+                <input type="text" class="form-field" id="formName" placeholder="Ada Lovelace" />
+              </div>
+              <div style="margin-bottom:1.25rem">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-field" id="formEmail" placeholder="ada@example.com" />
+              </div>
+              <div style="margin-bottom:1.25rem">
+                <label class="form-label">Message</label>
+                <textarea class="form-field" id="formMsg" rows="5" placeholder="I'd love to collaborate on..."></textarea>
+              </div>
+              <button class="btn-submit" onclick="submitForm()">Send Message →</button>
+            </div>
+            <div class="success-msg" id="successMsg">
+              <div class="success-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="display" style="font-size:1.5rem" class="gradient-text">Message Sent!</div>
+              <p style="font-size:.875rem;color:rgba(224,215,255,.4);margin-top:.5rem">I'll get back to you soon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo gradient-text">Sanjana S</span>
+    <span class="footer-credit">Built with React · Vite · Tailwind · Framer Motion</span>
+    <span class="footer-copy">© 2025 · All rights reserved</span>
+  </div>
+</footer>
+
+<script>
+// ─── SKILLS DATA ───────────────────────────────────────
+const skillCats = [
+  { label:'Programming', icon:'{ }', color:'#8b5cf6', skills:['Python','Java','SQL','Bash'] },
+  { label:'AI / ML',      icon:'✦',   color:'#c084fc', skills:['NLP','RAG','Sentence Transformers','HuggingFace','LangChain','PyTorch'] },
+  { label:'Backend',      icon:'⚡',   color:'#a78bfa', skills:['FastAPI','REST APIs','Async Python','Pydantic','Docker'] },
+  { label:'Databases',    icon:'◈',   color:'#f0abfc', skills:['MySQL','PostgreSQL','MongoDB','Redis'] },
+  { label:'Tools & Infra',icon:'⚙',   color:'#818cf8', skills:['FAISS','Git','Postman','Jupyter','Linux'] },
+]
+
+const skillsContainer = document.getElementById('skillsContainer')
+skillCats.forEach((cat, ci) => {
+  const div = document.createElement('div')
+  div.className = 'skill-cat glass glass-hover reveal'
+  div.style.transitionDelay = (ci * 0.08) + 's'
+  div.innerHTML = `
+    <div class="skill-cat-header">
+      <div class="skill-cat-icon" style="background:${cat.color}15;border:1px solid ${cat.color}25;color:${cat.color}">${cat.icon}</div>
+      <span class="skill-cat-label">${cat.label}</span>
+    </div>
+    <div class="skill-badges">
+      ${cat.skills.map((s,si) => `
+        <span class="skill-badge reveal" style="background:${cat.color}10;border-color:${cat.color}22;color:${cat.color};transition-delay:${(ci*0.06+si*0.04).toFixed(2)}s"
+          onmouseenter="this.style.boxShadow='0 0 16px ${cat.color}30,0 0 4px ${cat.color}15'"
+          onmouseleave="this.style.boxShadow='none'">${s}</span>
+      `).join('')}
+    </div>
+  `
+  skillsContainer.appendChild(div)
+})
+
+// ─── EXPERIENCE DATA ────────────────────────────────────
+const exps = [
+  { year:'2024', title:'RAG Systems Engineering', subtitle:'AI Research & Development', color:'#8b5cf6',
+    desc:'Designed and implemented end-to-end Retrieval-Augmented Generation pipelines using FAISS and Sentence Transformers. Achieved sub-200ms retrieval latency on 100K+ document collections through chunking optimization and index tuning.',
+    tags:['FAISS Vector Indexing','Semantic Chunking','RAG Architecture','Sub-200ms Retrieval'] },
+  { year:'2024', title:'Backend API Development', subtitle:'FastAPI & Scalable Architecture', color:'#a78bfa',
+    desc:'Built production-grade REST APIs with FastAPI, implementing async request handling, Pydantic schema validation, and PostgreSQL integration. Achieved 3× throughput improvements through async optimization and connection pooling.',
+    tags:['FastAPI','Async Architecture','PostgreSQL','API Optimization'] },
+  { year:'2023', title:'Language Bridge — Patent Filed', subtitle:'OCR Translation Innovation', color:'#c084fc',
+    desc:'Developed a novel OCR-based multilingual translation system that extracts and translates text from images in real time across 20+ languages. The core methodology was deemed sufficiently novel for a patent filing.',
+    tags:['Patent Application','OCR Pipeline','20+ Languages','Real-time Translation'] },
+  { year:'2023', title:'NLP Research', subtitle:'Bengali Hate Speech Detection', color:'#f0abfc',
+    desc:'Conducted applied NLP research on low-resource Bengali language data. Fine-tuned multilingual transformer models with custom preprocessing for code-switching and colloquial text, reaching state-of-the-art classification accuracy.',
+    tags:['Transformers','Low-resource NLP','Fine-tuning','Multilingual Models'] },
+]
+
+const expContainer = document.getElementById('expContainer')
+exps.forEach((exp, i) => {
+  const div = document.createElement('div')
+  div.className = 'exp-item'
+  div.innerHTML = `
+    <div class="exp-card glass glass-hover reveal" style="transition-delay:${i*0.1}s; --exp-color:${exp.color}">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,${exp.color}60,transparent)"></div>
+      <div class="exp-year" style="color:${exp.color}aa">${exp.year}</div>
+      <div class="exp-title">${exp.title}</div>
+      <div class="exp-subtitle">${exp.subtitle}</div>
+      <p class="exp-desc">${exp.desc}</p>
+      <div class="exp-highlights">
+        ${exp.tags.map(t=>`<span class="tag" style="background:${exp.color}10;border-color:${exp.color}22;color:${exp.color}cc">${t}</span>`).join('')}
+      </div>
+    </div>
+  `
+  expContainer.appendChild(div)
+})
+
+// ─── LOADER ─────────────────────────────────────────────
+const loader = document.getElementById('loader')
+setTimeout(() => {
+  loader.classList.add('hidden')
+  // Trigger initial reveals
+  document.querySelectorAll('.reveal').forEach(el => {
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight + 80) el.classList.add('visible')
+  })
+}, 2000)
+
+// ─── SCROLL REVEALS ─────────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+}, { rootMargin: '-60px 0px' })
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el))
+
+// Re-observe dynamically added elements
+setTimeout(() => {
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el))
+}, 100)
+
+// ─── SCROLL PROGRESS ────────────────────────────────────
+const progress = document.getElementById('scroll-progress')
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY
+  const docH = document.documentElement.scrollHeight - window.innerHeight
+  progress.style.width = (docH > 0 ? (scrollTop / docH) * 100 : 0) + '%'
+  // Navbar
+  const nav = document.getElementById('navbar')
+  nav.classList.toggle('scrolled', scrollTop > 40)
+}, { passive: true })
+
+// ─── CURSOR ─────────────────────────────────────────────
+const dot = document.getElementById('cursorDot')
+const ring = document.getElementById('cursorRing')
+let rx = 0, ry = 0, mx = 0, my = 0
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px'
+});
+(function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px'
+  requestAnimationFrame(animRing)
+})()
+document.addEventListener('mouseover', e => {
+  if (e.target.closest('a,button,[data-cursor]')) ring.classList.add('hovering')
+  else ring.classList.remove('hovering')
+})
+
+// ─── TYPING ANIMATION ───────────────────────────────────
+const words = ['AI Systems','RAG Pipelines','FastAPI Backends','NLP Models','Vector Search','Scalable APIs']
+let wi = 0, chars = 0, deleting = false
+const tyEl = document.getElementById('typingWord')
+function typeStep() {
+  const word = words[wi]
+  if (!deleting && chars < word.length) {
+    tyEl.textContent = word.slice(0, ++chars)
+    setTimeout(typeStep, 80)
+  } else if (!deleting && chars === word.length) {
+    setTimeout(() => { deleting = true; typeStep() }, 2000)
+  } else if (deleting && chars > 0) {
+    tyEl.textContent = word.slice(0, --chars)
+    setTimeout(typeStep, 45)
+  } else {
+    deleting = false; wi = (wi + 1) % words.length
+    setTimeout(typeStep, 200)
+  }
+}
+typeStep()
+
+// ─── SMOOTH SCROLL ──────────────────────────────────────
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+// ─── THEME TOGGLE ───────────────────────────────────────
+let isDark = true
+const sunIcon = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`
+const moonIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`
+function toggleTheme() {
+  isDark = !isDark
+  document.body.classList.toggle('light', !isDark)
+  document.getElementById('themeIcon').innerHTML = isDark ? moonIcon : sunIcon
+}
+
+// ─── CONTACT FORM ───────────────────────────────────────
+function submitForm() {
+  const name = document.getElementById('formName').value.trim()
+  const email = document.getElementById('formEmail').value.trim()
+  const msg = document.getElementById('formMsg').value.trim()
+  if (!name || !email || !msg) return
+  document.getElementById('formWrapper').style.display = 'none'
+  const s = document.getElementById('successMsg')
+  s.classList.add('show')
+  setTimeout(() => {
+    s.classList.remove('show')
+    document.getElementById('formWrapper').style.display = ''
+    document.getElementById('formName').value = ''
+    document.getElementById('formEmail').value = ''
+    document.getElementById('formMsg').value = ''
+  }, 4000)
+}
+
+// ─── PARTICLES ──────────────────────────────────────────
+const canvas = document.getElementById('particle-canvas')
+const ctx = canvas.getContext('2d')
+let W, H, particles = []
+const COLORS = ['rgba(139,92,246,','rgba(192,132,252,','rgba(240,171,252,','rgba(224,215,255,','rgba(196,181,253,']
+
+function resizeCanvas() {
+  W = canvas.width = window.innerWidth
+  H = canvas.height = window.innerHeight
+}
+
+class Particle {
+  constructor() { this.reset(true) }
+  reset(init = false) {
+    this.x = Math.random() * W; this.y = init ? Math.random() * H : (Math.random() > .5 ? -10 : H + 10)
+    this.size = Math.random() * 1.4 + .3
+    this.vx = (Math.random() - .5) * .3; this.vy = (Math.random() - .5) * .3
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)]
+    this.alpha = Math.random() * .45 + .1; this.da = (Math.random() > .5 ? .003 : -.003)
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy
+    this.alpha += this.da
+    if (this.alpha < .05 || this.alpha > .6) this.da *= -1
+    if (this.x < -20 || this.x > W + 20 || this.y < -20 || this.y > H + 20) this.reset()
+  }
+  draw() {
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+    ctx.fillStyle = this.color + this.alpha + ')'; ctx.fill()
+  }
+}
+
+resizeCanvas()
+for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+(function loop() {
+  ctx.clearRect(0, 0, W, H)
+  // Connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i+1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y
+      const d = Math.sqrt(dx*dx + dy*dy)
+      if (d < 120) {
+        ctx.beginPath()
+        ctx.strokeStyle = `rgba(139,92,246,${.06 * (1-d/120)})`
+        ctx.lineWidth = .5
+        ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y)
+        ctx.stroke()
+      }
+    }
+  }
+  particles.forEach(p => { p.update(); p.draw() })
+  requestAnimationFrame(loop)
+})()
+
+window.addEventListener('resize', resizeCanvas)
+
+// Re-run reveal observer after dynamic elements are added
+setTimeout(() => {
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el))
+}, 200)
+</script>
+</body>
+</html>
